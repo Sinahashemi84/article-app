@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { setSelectedArticle } from "@/store/slices/articleSlice";
 import { BsEye } from "react-icons/bs";
 import axios from "axios";
+import Image from "next/image";
 
 export interface Article {
   userId: number;
@@ -37,7 +38,7 @@ const Articles = () => {
 
   const infoData = {
     title: "Articles",
-    columns: ["Number", "Title", "Article Description", ""],
+    columns: ["Image", "Number", "Title", "Article Description", ""],
   };
 
   const itemHandler = (id: number) => {
@@ -58,6 +59,13 @@ const Articles = () => {
     itemHandler?: (id: number) => void
   ) => (
     <div className="p-4 border rounded-lg bg-white shadow-md w-full">
+      <Image
+        src={`https://picsum.photos/seed/${row.id}/500/300`}
+        alt={`Article ${row.id}`}
+        width={500}
+        height={300}
+        className="w-full h-48 object-cover rounded mb-4"
+      />
       <div className="flex items-center">
         <div className="mr-4 font-16Regular !text-Gray600">
           <div>{`${row?.title}`}</div>
@@ -86,6 +94,15 @@ const Articles = () => {
     itemHandler?: (id: number) => void
   ) => (
     <>
+      <td className="px-4 py-4">
+        <Image
+          src={`https://picsum.photos/seed/${row.id}/100/60`}
+          alt={`Article ${row.id}`}
+          width={100}
+          height={60}
+          className="w-24 h-14 object-cover rounded"
+        />
+      </td>
       <td className="px-4 py-4">{row.id}</td>
       <td className="px-4 py-4">{row.title}</td>
       <td className="px-4 py-4">{row.body}</td>
