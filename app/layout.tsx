@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "./providers/redux-provider";
 import ThemeProvider from "./providers/theme-provider";
+import ThemeToggle from "./components/theme-toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,23 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <div className="min-h-screen flex flex-col">
+              {/* Header */}
+              <header className="w-full flex items-center justify-between px-8 py-4 border-b bg-white dark:bg-gray-900 mb-6">
+                <h1 className="text-xl font-bold text-gray-800 dark:text-gray-100">
+                  Article App
+                </h1>
+                <ThemeToggle />
+              </header>
+              {/* Main Content */}
+              <main className="flex-1 w-full px-8 py-6 mx-20">{children}</main>
+              {/* Footer */}
+              <footer className="w-full text-center py-4 border-t text-gray-500 bg-white dark:bg-gray-900">
+                Article App. All rights reserved.
+              </footer>
+            </div>
+          </ThemeProvider>
         </ReduxProvider>
       </body>
     </html>
