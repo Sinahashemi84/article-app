@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Select, MenuItem as SelectItem, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import PrimaryBottun from "./PrimaryButtun";
 import SecondaryBottun from "./SecondaryButton";
 
@@ -132,27 +132,78 @@ export default function DataTable<T>({
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="px-6 py-2 bg-gray-200 text-gray-600 rounded-md disabled:bg-gray-100"
+            className="px-4 py-2 bg-gray-200 text-gray-600 rounded-md disabled:bg-gray-100"
           >
             Previous
           </button>
-          <Select
-            value={currentPage}
-            onChange={(e) => setCurrentPage(e.target.value)}
-            className="mx-4 max-h-[40px]"
-          >
-            {Array.from({ length: totalPages }, (_, index) => (
-              <SelectItem key={index + 1} value={index + 1}>
-                Page {index + 1}
-              </SelectItem>
-            ))}
-          </Select>
+          <div className="flex gap-1">
+            {/* First page button */}
+            {currentPage > 3 && (
+              <>
+                <button
+                  onClick={() => setCurrentPage(1)}
+                  className={`px-3 py-2 rounded-md ${
+                    currentPage === 1
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  1
+                </button>
+                {currentPage > 4 && (
+                  <span className="px-2 py-2 text-gray-500">...</span>
+                )}
+              </>
+            )}
+
+            {/* Dynamic page numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((page) => {
+                if (totalPages <= 5) return true;
+                if (currentPage <= 3) return page <= 4;
+                if (currentPage >= totalPages - 2)
+                  return page >= totalPages - 3;
+                return Math.abs(page - currentPage) <= 1;
+              })
+              .map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-3 py-2 rounded-md ${
+                    currentPage === page
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+            {/* Last page button */}
+            {currentPage < totalPages - 2 && totalPages > 5 && (
+              <>
+                {currentPage < totalPages - 3 && (
+                  <span className="px-2 py-2 text-gray-500">...</span>
+                )}
+                <button
+                  onClick={() => setCurrentPage(totalPages)}
+                  className={`px-3 py-2 rounded-md ${
+                    currentPage === totalPages
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {totalPages}
+                </button>
+              </>
+            )}
+          </div>
           <button
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
-            className="px-6 py-2 bg-gray-200 text-gray-600 rounded-md disabled:bg-gray-100"
+            className="px-4 py-2 bg-gray-200 text-gray-600 rounded-md disabled:bg-gray-100"
           >
             Next
           </button>
