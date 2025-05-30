@@ -24,7 +24,7 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({
 }) => {
   const commonClasses = `h-[42px] ${width || ""} ${textColor || ""} ${
     borderColor || ""
-  } flex justify-center border items-center gap-1 rounded-[10px] !bg-white align-middle font-16Bold ${
+  } flex justify-center border items-center gap-1 rounded-[10px] bg-white dark:bg-gray-800 align-middle ${
     px || ""
   }`;
 

@@ -41,7 +41,7 @@ export default function RootLayout({
                 <ThemeToggle />
               </header>
               {/* Main Content */}
-              <main className="flex-1 w-full px-8 py-6 mx-20">{children}</main>
+              <main className="flex-1 w-full lg:px-8 py-6">{children}</main>
               {/* Footer */}
               <footer className="w-full text-center py-4 border-t text-gray-500 bg-white dark:bg-gray-900">
                 Article App. All rights reserved.

@@ -58,7 +58,7 @@ const Articles = () => {
     index: number,
     itemHandler?: (id: number) => void
   ) => (
-    <div className="p-4 border rounded-lg bg-white shadow-md w-full">
+    <div className="p-4 border rounded-lg bg-white dark:bg-gray-800 shadow-md w-full">
       <Image
         src={`https://picsum.photos/seed/${row.id}/500/300`}
         alt={`Article ${row.id}`}
@@ -67,22 +67,22 @@ const Articles = () => {
         className="w-full h-48 object-cover rounded mb-4"
       />
       <div className="flex items-center">
-        <div className="mr-4 font-16Regular !text-Gray600">
-          <div>{`${row?.title}`}</div>
+        <div className="mr-4">
+          <div className="font-bold text-gray-600 dark:text-gray-300">{`${row?.title}`}</div>
         </div>
       </div>
       <div className="mt-2">
-        <p className="text-sm text-gray-600"> شرایط: {row.body}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">{row.body}</p>
       </div>
       <div className="mt-4 flex gap-2">
         <PrimaryBottun
           width={"w-full"}
-          bgColor={"bg-blue-500"}
+          bgColor={"bg-primary-100 dark:bg-primary-600"}
           px={"px-4"}
           clickHandler={() => itemHandler && itemHandler(row.id)}
         >
-          <BsEye size={18} />
           Open
+          <BsEye size={20} />
         </PrimaryBottun>
       </div>
     </div>
@@ -94,7 +94,7 @@ const Articles = () => {
     itemHandler?: (id: number) => void
   ) => (
     <>
-      <td className="px-4 py-4">
+      <td className="px-4 py-4 bg-white dark:bg-gray-800">
         <Image
           src={`https://picsum.photos/seed/${row.id}/100/60`}
           alt={`Article ${row.id}`}
@@ -103,33 +103,38 @@ const Articles = () => {
           className="w-24 h-14 object-cover rounded"
         />
       </td>
-      <td className="px-4 py-4">{row.id}</td>
-      <td className="px-4 py-4">{row.title}</td>
-      <td className="px-4 py-4">{row.body}</td>
-      <td>
+      <td className="px-4 bg-white dark:bg-gray-800 py-4 font-bold text-gray-600 dark:text-gray-300">
+        {row.id}
+      </td>
+      <td className="px-4 bg-white dark:bg-gray-800 py-4 font-bold text-gray-600 dark:text-gray-300">
+        {row.title}
+      </td>
+      <td className="px-4 bg-white dark:bg-gray-800 py-4 font-bold text-gray-600 dark:text-gray-300">
+        {row.body}
+      </td>
+      <td className="px-4 bg-white dark:bg-gray-800 py-4">
         <div className="flex justify-center items-center gap-3">
           <PrimaryBottun
             width={"w-fit"}
-            bgColor={"bg-primary-500"}
+            bgColor={"bg-primary-100 dark:bg-primary-600"}
             px={"px-6"}
             clickHandler={() => itemHandler && itemHandler(row.id)}
           >
-            <BsEye size={18} />
             Open
+            <BsEye size={20} />
           </PrimaryBottun>
         </div>
       </td>
     </>
   );
   return (
-    <div className="bg-primary-100  p-6 rounded-lg shadow-md">
+    <div className="bg-primary-100 dark:bg-primary-900 p-6 rounded-lg shadow-md">
       <div className="flex w-full justify-between items-center ">
         <div className="flex gap-2 justify-between items-center">
-          <div className="border-l-8 rounded-l-[6px] border-DarkBlue400 h-10"></div>
-          <div className="font-20Bold !text-Gray600">Articles List</div>
+          <div className="font-bold">Articles List</div>
         </div>
       </div>
-      <div className="w-full  border-1 opacity-50 mb-4"></div>
+      <div className="w-full  border-2 opacity-50 my-4 border-secondary-600"></div>
       <div className="w-full">
         <DataTable
           data={data}

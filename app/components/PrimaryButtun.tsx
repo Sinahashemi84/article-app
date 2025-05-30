@@ -24,16 +24,14 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 }) => {
   const commonClasses = `${width || ""} h-[42px] ${
     bgColor || ""
-  } flex items-center justify-center gap-1 rounded-[10px] align-middle !text-white ${
+  } flex items-center justify-center gap-1 rounded-[10px] align-middle font-semibold dark:text-white text-gray-800 ${
     px || ""
   }`;
 
   if (href) {
     return (
       <Link href={href}>
-        <a className={commonClasses} onClick={clickHandler}>
-          {children}
-        </a>
+        <div className={commonClasses}>{children}</div>
       </Link>
     );
   }

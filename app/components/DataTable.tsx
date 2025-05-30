@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { useMediaQuery } from "@mui/material";
-import PrimaryBottun from "./PrimaryButtun";
 import SecondaryBottun from "./SecondaryButton";
 
 type DataTableProps<T> = {
@@ -28,8 +27,6 @@ type DataTableProps<T> = {
 
 export default function DataTable<T>({
   data,
-  modalHandler,
-  buttonText,
   columns,
   renderRow,
   renderCard,
@@ -54,36 +51,28 @@ export default function DataTable<T>({
   return (
     <>
       {/* Header with Toggle Button */}
-      <div className="mb-4 flex justify-between items-center gap-2">
-        <div className=" lg:flex gap-4">
-          {buttonText && (
-            <PrimaryBottun width="w-fit" clickHandler={modalHandler} px="px-8">
-              {buttonText}
-            </PrimaryBottun>
-          )}
-          {haveViewToggle && (
-            <SecondaryBottun
-              width="w-fit"
-              borderColor="border-black border-2"
-              px={"px-4"}
-              onClick={toggleHandler}
-            >
-              {isTableView ? "Card" : "List"}
-            </SecondaryBottun>
-          )}
-        </div>
-      </div>
+      {haveViewToggle && (
+        <SecondaryBottun
+          width="w-fit"
+          textColor="text-gray-600 dark:text-gray-300 font-semibold mb-6 hidden lg:block"
+          borderColor="border-black border-2"
+          px={"px-4"}
+          onClick={toggleHandler}
+        >
+          {isTableView ? "Card" : "List"}
+        </SecondaryBottun>
+      )}
 
       {isTableView && !isMobile ? (
-        <table className="min-w-full table-auto bg-white shadow-md">
+        <table className="min-w-full table-auto bg-white shadow-md rounded-lg dark:bg-gray-600">
           <thead>
-            <tr className="bg-gray-100 text-gray-700">
+            <tr className="bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300">
               {columns?.map((column, index) => (
                 <th
                   key={index}
-                  className={`py-4 text-right font-semibold text-sm ${
-                    index === 0 ? "rounded-tr-lg pr-3" : ""
-                  } ${index === columns.length - 1 ? "rounded-tl-lg" : ""}`}
+                  className={`py-4 text-center font-semibold text-sm ${
+                    index === 0 ? "rounded-tl-lg pr-3" : ""
+                  } ${index === columns.length - 1 ? "rounded-tr-lg" : ""}`}
                 >
                   {column}
                 </th>
@@ -128,7 +117,7 @@ export default function DataTable<T>({
 
       {/* Pagination Controls */}
       {data?.length >= itemsPerPage && (
-        <div className="flex justify-end items-center mt-4 gap-4">
+        <div className="flex flex-wrap justify-end items-center mt-4 gap-4 w-full max-w-full overflow-x-auto sm:justify-end sm:flex-nowrap">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
@@ -136,7 +125,7 @@ export default function DataTable<T>({
           >
             Previous
           </button>
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
             {/* First page button */}
             {currentPage > 3 && (
               <>
