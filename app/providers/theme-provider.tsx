@@ -23,7 +23,7 @@ export default function ThemeProvider({
     const theme = cookieTheme || (systemPrefersDark ? "dark" : "light");
 
     dispatch(setTheme(theme));
-    document.documentElement.classList.toggle("dark", theme === "dark");
+    // No need to toggle class here anymore!
   }, [dispatch]);
 
   return children;

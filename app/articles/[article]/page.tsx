@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const Article = () => {
-  const article = useSearchParams();
+  const params = useParams();
+  const article = params.article; 
+
   type ArticleData = {
     userId: number;
     id: number;
@@ -15,6 +17,7 @@ const Article = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!article) return;
     const fetchData = async () => {
       const response = await fetch(
         `https://jsonplaceholder.typicode.com/posts/${article}`

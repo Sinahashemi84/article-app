@@ -46,7 +46,7 @@ const Articles = () => {
     if (article) {
       dispatch(setSelectedArticle(article));
     }
-    router.push(`/articles/article/${id}`);
+    router.push(`/articles/${id}`);
   };
 
   const toggleHandler = () => {
@@ -110,7 +110,7 @@ const Articles = () => {
         <div className="flex justify-center items-center gap-3">
           <PrimaryBottun
             width={"w-fit"}
-            bgColor={"bg-blue-500"}
+            bgColor={"bg-primary-500"}
             px={"px-6"}
             clickHandler={() => itemHandler && itemHandler(row.id)}
           >
@@ -122,7 +122,7 @@ const Articles = () => {
     </>
   );
   return (
-    <div className="">
+    <div className="bg-primary-100  p-6 rounded-lg shadow-md">
       <div className="flex w-full justify-between items-center ">
         <div className="flex gap-2 justify-between items-center">
           <div className="border-l-8 rounded-l-[6px] border-DarkBlue400 h-10"></div>
